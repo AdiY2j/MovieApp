@@ -9,9 +9,12 @@ const API_URL = 'http://www.omdbapi.com?apikey=******';
 
 const App = () => {
 
+    // useState is used to initialize value and helpful for setting updated values after some event happens
+    // Helpful for state management like hook
     const [movies, setMovies] = useState([]);
     const [searchText, setSearchText] = useState('');
 
+    // Async search movies api call function
     const searchMovies = async (title) => {
         const response = await fetch(`${API_URL}&s=${title}`);
         const data = await response.json();
@@ -19,6 +22,9 @@ const App = () => {
         setMovies(data.Search);
     }
 
+    // Initially calls movies api once with Superman as input when page loads
+    // @param1 => function call to search movies
+    // @param2 => dependency array is empty as it will be called only once at the start
     useEffect(() => {
         searchMovies('Superman');
     }, []);
